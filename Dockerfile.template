@@ -1,6 +1,4 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:jessie-run
-
-ENV INITSYSTEM on
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:stretch-run
 
 # Install XORG
 RUN apt-get update && apt-get install --no-install-recommends xserver-xorg xserver-xorg-input-evdev
@@ -9,7 +7,7 @@ RUN apt-get update && apt-get install --no-install-recommends xserver-xorg xserv
 RUN apt-get install --no-install-recommends xinit
 
 # Install desktop environment
-RUN apt-get install xfce4 xfce4-terminal
+RUN apt-get install xfce4 xfce4-terminal dbus-x11
 
 RUN apt-get clean
 
@@ -17,5 +15,8 @@ RUN apt-get clean
 WORKDIR /usr/src/app
 
 COPY . ./
+
+ENV UDEV=1
+ENV XFCE_PANEL_MIGRATE_DEFAULT=1
 
 CMD ["bash", "start.sh"]
