@@ -10,6 +10,6 @@ startx
 
 while :
 do
-	echo "Press [CTRL+C] to stop.."
+	echo "startx failed, so we will just wait here while you debug!"
 	sleep 30
 done
