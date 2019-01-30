@@ -1,4 +1,15 @@
 #!/usr/bin/bash
-echo "Boom 6"
-sleep 5
+
+rm /tmp/.X0-lock &>/dev/null || true
+
+export DISPLAY=:0
+export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
+echo "Starting Xorg in 2 seconds"
+sleep 2
 startx
+
+while :
+do
+	echo "Press [CTRL+C] to stop.."
+	sleep 30
+done

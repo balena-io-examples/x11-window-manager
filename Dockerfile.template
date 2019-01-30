@@ -1,21 +1,21 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:jessie-run
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:stretch-run
 
-ENV INITSYSTEM on
-
-# Install XORG
-RUN apt-get update && apt-get install --no-install-recommends xserver-xorg xserver-xorg-input-evdev
-
-# To to able to start X from the terminal
-RUN apt-get install --no-install-recommends xinit
+COPY sources.list /etc/apt/sources.list
+COPY raspi.list /etc/apt/sources.list.d/raspi.list
 
 # Install desktop environment
-RUN apt-get install xfce4 xfce4-terminal
+RUN install_packages xserver-xorg \
+    xinit lxsession desktop-file-utils \
+    raspberrypi-ui-mods rpd-icons \
+    gtk2-engines-clearlookspix
 
-RUN apt-get clean
+# disable lxpolkit popup warning
+RUN mv /usr/bin/lxpolkit /usr/bin/lxpolkit.bak
 
 # Setting working directory
 WORKDIR /usr/src/app
 
 COPY . ./
 
+ENV UDEV=1
 CMD ["bash", "start.sh"]
