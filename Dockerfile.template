@@ -1,17 +1,18 @@
 FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:jessie-run
 
+
 ENV INITSYSTEM on
 
 # Install XORG
-RUN apt-get update && apt-get install --no-install-recommends xserver-xorg
+RUN apt-get update && apt-get install --no-install-recommends xserver-xorg xserver-xorg-input-evdev
 
 # To to able to start X from the terminal
-RUN apt-get install --no-install-recommends xinit xterm 
+RUN apt-get install --no-install-recommends xinit
 
-# Install openbox to run only the single application on the screen
-RUN apt-get install openbox lxterminal x11-apps x11-xserver-utils
+# Install desktop environment
+RUN apt-get install xfce4 xfce4-terminal
 
-RUN sudo apt-get clean
+RUN apt-get clean
 
 # Setting working directory
 WORKDIR /usr/src/app
