@@ -6,16 +6,10 @@ ENV INITSYSTEM on
 RUN apt-get update && apt-get install --no-install-recommends xserver-xorg
 
 # To to able to start X from the terminal
-RUN apt-get install --no-install-recommends xinit
+RUN apt-get install --no-install-recommends xinit xterm 
 
 # Install openbox to run only the single application on the screen
-RUN apt-get install openbox lxterminal
-
-# Login Manager
-# RUN apt-get install lightdm
-
-# RUN apt-get install lxde-core lxappearance lxsession lxpolkit lxsession
-# RUN apt-get install lightdm
+RUN apt-get install openbox lxterminal x11-apps x11-xserver-utils xorg-x11-fonts
 
 RUN sudo apt-get clean
 
