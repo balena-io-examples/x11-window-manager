@@ -1,6 +1,5 @@
 FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:jessie-run
 
-
 ENV INITSYSTEM on
 
 # Install XORG
