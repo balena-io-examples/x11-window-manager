@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install --no-install-recommends xserver-xorg
 RUN apt-get install --no-install-recommends xinit xterm 
 
 # Install openbox to run only the single application on the screen
-RUN apt-get install openbox lxterminal x11-apps x11-xserver-utils xorg-x11-fonts
+RUN apt-get install openbox lxterminal x11-apps x11-xserver-utils
 
 RUN sudo apt-get clean
 
