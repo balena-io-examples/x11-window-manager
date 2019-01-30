@@ -1,0 +1,27 @@
+FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:jessie-run
+
+ENV INITSYSTEM on
+
+# Install XORG
+RUN apt-get update && apt-get install --no-install-recommends xserver-xorg
+
+# To to able to start X from the terminal
+RUN apt-get install --no-install-recommends xinit
+
+# Install openbox to run only the single application on the screen
+RUN apt-get install openbox lxterminal
+
+# Login Manager
+# RUN apt-get install lightdm
+
+# RUN apt-get install lxde-core lxappearance lxsession lxpolkit lxsession
+# RUN apt-get install lightdm
+
+RUN sudo apt-get clean
+
+# Setting working directory
+WORKDIR /usr/src/app
+
+COPY . ./
+
+CMD ["bash", "start.sh"]
