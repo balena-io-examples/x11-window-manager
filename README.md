@@ -1,0 +1,1 @@
+Add env `XFCE_PANEL_MIGRATE_DEFAULT` with any value to disable XFCE4 popup window when starting.
