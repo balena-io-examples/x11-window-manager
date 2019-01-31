@@ -7,7 +7,8 @@ COPY raspi.list /etc/apt/sources.list.d/raspi.list
 RUN install_packages xserver-xorg \
     xinit lxsession desktop-file-utils \
     raspberrypi-ui-mods rpd-icons \
-    gtk2-engines-clearlookspix
+    gtk2-engines-clearlookspix \
+    matchbox-keyboard 
 
 # disable lxpolkit popup warning
 RUN mv /usr/bin/lxpolkit /usr/bin/lxpolkit.bak
@@ -25,7 +26,7 @@ WORKDIR /usr/src/app
 COPY start.sh start.sh
 
 # Adding things to autostart will cause them to be launchd automatically on starup
-COPY autostart /etc/xdg/lxsession/LXDE-pi/autostart
+# COPY autostart /etc/xdg/lxsession/LXDE-pi/autostart
 
 ENV UDEV=1
 CMD ["bash", "start.sh"]
