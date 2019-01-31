@@ -13,8 +13,10 @@ RUN apt-get clean
 # Disable screen from turning it off
 RUN echo "#!/bin/bash" > /etc/X11/xinit/xserverrc \
   && echo "" >> /etc/X11/xinit/xserverrc \
-  && echo 'exec /usr/bin/X -s 0 dpms' >> /etc/X11/xinit/xserverrc
-  # && echo 'exec /usr/bin/X -s 0 dpms -nocursor -nolisten tcp "$@"' >> /etc/X11/xinit/xserverrc
+  && echo 'exec /usr/bin/X -s 0 dpms' >> /etc/X11/xinit/xserverrc \
+  # && echo "#!/bin/bash" > /etc/X11/xinit/xinitrc \
+  # && echo "" >> /etc/X11/xinit/xinitrc \
+  # && echo 'exec /usr/bin/x-terminal-emulator' >> /etc/X11/xinit/xinitrc
 
 # Setting working directory
 WORKDIR /usr/src/app
