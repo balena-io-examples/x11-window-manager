@@ -6,6 +6,7 @@ RUN install_packages xserver-xorg \
   xinit \
   xfce4 \
   xfce4-terminal \
+  x11-xserver-utils \
   dbus-x11 
   
 RUN apt-get clean
