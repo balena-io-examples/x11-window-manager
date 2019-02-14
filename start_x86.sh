@@ -2,11 +2,11 @@
 export DISPLAY=:0.0
 export DBUS_SYSTEM_BUS_ADDRESS=unix:path=/host/run/dbus/system_bus_socket
 
-# start x normally
-startx
+# start desktop manager
+startx 
 
-# start x with an application full-screen
-# startx /usr/bin/xterm
-
-# start x without the cursor
+## uncomment to start x without mouse cursor
 # startx -- -nocursor
+
+## start x and open an application
+# startx xterm

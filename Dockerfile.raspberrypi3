@@ -1,4 +1,4 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:stretch-run
+FROM balenalib/raspberrypi3-debian:stretch-run
 
 COPY sources.list /etc/apt/sources.list
 COPY raspi.list /etc/apt/sources.list.d/raspi.list
