@@ -1,21 +1,20 @@
 FROM balenalib/%%BALENA_MACHINE_NAME%%-debian:stretch-run
 
-COPY sources.list /etc/apt/sources.list
-COPY raspi.list /etc/apt/sources.list.d/raspi.list
-
-# Install desktop environment
+# Install XORG
 RUN install_packages xserver-xorg \
-    xinit lxsession desktop-file-utils \
-    raspberrypi-ui-mods rpd-icons \
-    gtk2-engines-clearlookspix \
-    matchbox-keyboard 
+  xserver-xorg-input-evdev \
+  xinit \
+  xfce4 \
+  xfce4-terminal \
+  x11-xserver-utils \
+  dbus-x11 
+  
+RUN apt-get clean
 
-# disable lxpolkit popup warning
-RUN mv /usr/bin/lxpolkit /usr/bin/lxpolkit.bak
-
+# Disable screen from turning it off
 RUN echo "#!/bin/bash" > /etc/X11/xinit/xserverrc \
   && echo "" >> /etc/X11/xinit/xserverrc \
-  && echo 'exec /usr/bin/X -s 0 dpms -nolisten tcp "$@"' >> /etc/X11/xinit/xserverrc
+  && echo 'exec /usr/bin/X -s 0 dpms' >> /etc/X11/xinit/xserverrc 
 
 # Install xterm as an example app.
 RUN install_packages xterm
@@ -23,10 +22,11 @@ RUN install_packages xterm
 # Setting working directory
 WORKDIR /usr/src/app
 
-COPY start.sh start.sh
-
-# Adding things to autostart will cause them to be launchd automatically on starup
-# COPY autostart /etc/xdg/lxsession/LXDE-pi/autostart
+COPY . ./
 
 ENV UDEV=1
-CMD ["bash", "start.sh"]
+
+# Avoid requesting XFCE4 question on X start
+ENV XFCE_PANEL_MIGRATE_DEFAULT=1
+
+CMD ["bash", "start_x86.sh"]
