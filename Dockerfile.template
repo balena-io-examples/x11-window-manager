@@ -7,7 +7,8 @@ RUN install_packages xserver-xorg \
   xfce4 \
   xfce4-terminal \
   x11-xserver-utils \
-  dbus-x11 
+  dbus-x11 \
+  matchbox-keyboard 
   
 RUN apt-get clean
 
