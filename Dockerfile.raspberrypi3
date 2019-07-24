@@ -1,10 +1,17 @@
-FROM balenalib/raspberrypi3-debian:stretch-run
+FROM balenalib/raspberrypi3-debian:buster-build
 
 COPY sources.list /etc/apt/sources.list
 COPY raspi.list /etc/apt/sources.list.d/raspi.list
 
+# RUN apt upgrade --fix-missing && apt-get update &&  apt-get dist-upgrade
+
 # Install desktop environment
-RUN install_packages xserver-xorg \
+ # perlapi-5.24.1
+RUN install_packages policykit-1 raspberrypi-sys-mods zenity libpam-systemd udev libsystemd0 systemd   \
+    xserver-xorg-core xserver-xorg-video-all \
+    libwebkit2gtk-4.0-37 libenchant1c2a  aspell aspell-en dictionaries-common libncursesw5 libtinfo5 libtext-iconv-perl \
+    keyboard-configuration perl-base liblocale-gettext-perl  \
+    xserver-xorg \
     xinit lxsession desktop-file-utils \
     raspberrypi-ui-mods rpd-icons \
     gtk2-engines-clearlookspix \
