@@ -1,10 +1,7 @@
-FROM balenalib/raspberrypi3-debian:stretch-run
-
-COPY sources.list /etc/apt/sources.list
-COPY raspi.list /etc/apt/sources.list.d/raspi.list
+FROM balenalib/raspberrypi3:buster
 
 # Install desktop environment
-RUN install_packages xserver-xorg \
+RUN install_packages xserver-xorg-core \
     xinit lxsession desktop-file-utils \
     raspberrypi-ui-mods rpd-icons \
     gtk2-engines-clearlookspix \
